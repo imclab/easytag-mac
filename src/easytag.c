@@ -3846,7 +3846,7 @@ void Update_Command_Buttons_Sensivity (void)
             ui_widget_set_sensitive(MENU_FILE, AM_SAVE, FALSE);
         else*/
             ui_widget_set_sensitive(MENU_FILE, AM_SAVE, TRUE);
-        
+
         ui_widget_set_sensitive(MENU_FILE, AM_SAVE_FORCED, TRUE);
 
         /* Enable undo command if there are data into main undo list (history list) */
@@ -4544,7 +4544,7 @@ Quit_MainWindow_Confirmed (void)
 {
     // Save the configuration when exiting...
     Save_Changes_Of_UI();
-    
+
     // Quit EasyTAG
     EasyTAG_Exit();
 }

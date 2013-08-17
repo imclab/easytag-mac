@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>English</string>
+    <key>CFBundleExecutable</key>
+    <string>EasyTAG</string>
+    <key>CFBundleGetInfoString</key>
+    <string>2.1.8, (C) 2013 David King</string>
+    <key>CFBundleIconFile</key>
+    <string>easytag.icns</string>
+    <key>CFBundleIdentifier</key>
+    <string>org.gnome.EasyTAG</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>2.1.8</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>2.24.18</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright (C) 2013 David King, GNU General Public License.</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.8</string>
+</dict>
+</plist>

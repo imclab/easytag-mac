@@ -57,6 +57,9 @@ static GList *ActionPairsList = NULL;
 static void Check_Menu_Item_Toggled_Browse_Hidden_Dir (GtkWidget *checkmenuitem);
 static void Check_Menu_Item_Toggled_Browse_Subdir (GtkWidget *checkmenuitem);
 static void Init_Menu_Bar (void);
+#ifdef GTKOSXAPPLICATION
+static void Init_OSX_App_Menu (void);
+#endif
 static void Statusbar_Remove_Timer (void);
 
 static void et_statusbar_push_tooltip (const gchar *message);
@@ -359,7 +362,7 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
 
     GtkRadioActionEntry view_mode_entries[] =
     {
-        { AM_TREE_VIEW_MODE, GTK_STOCK_OPEN, _("Tree Browser"), NULL,
+        { AM_TREE_VIEW_MODE, "audio-x-generic", _("Tree Browser"), NULL,
           _("View by directory tree"), 0 },
         { AM_ARTIST_VIEW_MODE, "easytag-artist-album",
           _("Artist and Album"), NULL,
@@ -445,9 +448,24 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
     gtk_widget_hide(menubar);
     osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);
     gtkosx_application_set_menu_bar(osx_app, GTK_MENU_SHELL(menubar));
+    Init_OSX_App_Menu();
+#endif
 
-    GtkosxApplicationMenuGroup *group;
-    GtkMenuItem *about_item, *preferences_item;
+    toolbar = gtk_ui_manager_get_widget (UIManager, "/ToolBar");
+    gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
+    gtk_widget_show_all(toolbar);
+
+    *pptoolbar = toolbar;
+    *ppmenubar = menubar;
+}
+
+#ifdef GTKOSXAPPLICATION
+static void
+Init_OSX_App_Menu (void) {
+    GtkosxApplication *osx_app;
+    GtkWidget *about_item, *preferences_item;
+
+    osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);;
 
     about_item = gtk_ui_manager_get_widget(UIManager, "/MenuBar/HelpMenu/About");
     gtk_widget_hide(about_item);
@@ -460,16 +478,8 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
     gtkosx_application_insert_app_menu_item(osx_app, GTK_WIDGET(about_item), 0);
     gtkosx_application_insert_app_menu_item(osx_app, gtk_separator_menu_item_new(), 1);
     gtkosx_application_insert_app_menu_item(osx_app, GTK_WIDGET(preferences_item), 2);
-#endif
-
-    toolbar = gtk_ui_manager_get_widget (UIManager, "/ToolBar");
-    gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
-    gtk_widget_show_all(toolbar);
-
-    *pptoolbar = toolbar;
-    *ppmenubar = menubar;
 }
-
+#endif
 
 /*
  * Initialize some items of the main menu
