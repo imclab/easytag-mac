@@ -448,6 +448,7 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
     gtk_widget_hide(menubar);
     osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);
     gtkosx_application_set_menu_bar(osx_app, GTK_MENU_SHELL(menubar));
+    gtkosx_application_set_use_quartz_accelerators(osx_app, TRUE);
     Init_OSX_App_Menu();
 #endif
 
@@ -478,6 +479,9 @@ Init_OSX_App_Menu (void) {
     gtkosx_application_insert_app_menu_item(osx_app, GTK_WIDGET(about_item), 0);
     gtkosx_application_insert_app_menu_item(osx_app, gtk_separator_menu_item_new(), 1);
     gtkosx_application_insert_app_menu_item(osx_app, GTK_WIDGET(preferences_item), 2);
+
+    gtkosx_application_set_window_menu(osx_app, NULL);
+    gtkosx_application_set_help_menu(osx_app, NULL);
 }
 #endif
 
