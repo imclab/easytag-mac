@@ -182,6 +182,7 @@ common_init (GApplication *application)
 
 #ifdef GTKOSXAPPLICATION
     GtkosxApplication *osx_app;
+    osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);
 #endif
 
     /* Starting messages */
@@ -317,7 +318,6 @@ common_init (GApplication *application)
     idle_handler_id = g_idle_add((GSourceFunc)Init_Load_Default_Dir,NULL);
 
 #ifdef GTKOSXAPPLICATION
-    osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);
     gtkosx_application_ready(osx_app);
 #endif
 
