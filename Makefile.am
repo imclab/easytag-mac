@@ -24,6 +24,7 @@ easytag_CPPFLAGS = \
 	-DPACKAGE_DATA_DIR=\"$(pkgdatadir)\"
 easytag_CFLAGS = \
 	$(WARN_CFLAGS) \
+	$(GTKOSXAPPLICATION_CFLAGS) \
 	$(EASYTAG_CFLAGS)
 
 easytag_SOURCES = \
@@ -109,6 +110,7 @@ easytag_headers = \
 
 easytag_LDADD = \
 	$(EASYTAG_LIBS) \
+	$(GTKOSXAPPLICATION_LIBS) \
 	$(ID3LIB_LIBS)
 
 # NSIS installer script.

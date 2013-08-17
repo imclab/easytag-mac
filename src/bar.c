@@ -23,6 +23,10 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n-lib.h>
 
+#ifdef GTKOSXAPPLICATION
+#include <gtkmacintegration/gtkosxapplication.h>
+#endif
+
 #include "bar.h"
 #include "easytag.h"
 #include "about.h"
@@ -135,6 +139,10 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
 {
     GtkWidget *menubar;
     GtkWidget *toolbar;
+
+#ifdef GTKOSXAPPLICATION
+    GtkosxApplication *osx_app;
+#endif
 
     /*
      * Structure :
@@ -422,6 +430,12 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
     menubar = gtk_ui_manager_get_widget(UIManager, "/MenuBar");
     Init_Menu_Bar();
     gtk_widget_show_all(menubar);
+
+#ifdef GTKOSXAPPLICATION
+    gtk_widget_hide(menubar);
+    osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);
+    gtkosx_application_set_menu_bar(osx_app, GTK_MENU_SHELL(menubar));
+#endif
 
     toolbar = gtk_ui_manager_get_widget (UIManager, "/ToolBar");
     gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);

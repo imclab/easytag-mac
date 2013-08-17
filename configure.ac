@@ -328,7 +328,17 @@ AC_CONFIG_FILES([ Makefile
                   doc/version.xml
                   po/Makefile.in
                ])
+
+dnl ------------------------------
+dnl Check if we're building for Mac.
+dnl ------------------------------
+PKG_CHECK_MODULES(GTKOSXAPPLICATION, gtk-mac-integration, [have_mac=yes], [have_mac=no])
+if test "x$have_mac" = xyes; then
+    AC_DEFINE([GTKOSXAPPLICATION],[1],[Defined if app is GtkOSXApplication])
+fi
+
 AC_OUTPUT
+
 
 echo 
 echo Configuration for $PACKAGE_NAME $PACKAGE_VERSION :
@@ -350,6 +360,7 @@ echo FLAC file support .......: $have_flac
 echo MP4 file support ........: $have_taglib
 echo WavPack support .........: $have_wavpack
 echo NLS/gettext .............: $USE_NLS
+echo Mac support .............: $have_mac
 echo Tests during make check .: $testing_utilities
 echo Install prefix ..........: $prefix
 echo 

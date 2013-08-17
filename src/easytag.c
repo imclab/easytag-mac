@@ -62,6 +62,9 @@
 #include <sys/wait.h>
 #endif /* !G_OS_WIN32 */
 
+#ifdef GTKOSXAPPLICATION
+#include <gtkmacintegration/gtkosxapplication.h>
+#endif
 
 /****************
  * Declarations *
@@ -176,6 +179,10 @@ common_init (GApplication *application)
 {
     GtkWidget *MainVBox;
     GtkWidget *HBox, *VBox;
+
+#ifdef GTKOSXAPPLICATION
+    GtkosxApplication *osx_app;
+#endif
 
     /* Starting messages */
     Log_Print(LOG_OK,_("Starting EasyTAG version %s (PID: %d)…"),PACKAGE_VERSION,getpid());
@@ -308,6 +315,11 @@ common_init (GApplication *application)
     /* Load the default dir when the UI is created and displayed
      * to the screen and open also the scanner window */
     idle_handler_id = g_idle_add((GSourceFunc)Init_Load_Default_Dir,NULL);
+
+#ifdef GTKOSXAPPLICATION
+    osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);
+    gtkosx_application_ready(osx_app);
+#endif
 
     gtk_main ();
 }
