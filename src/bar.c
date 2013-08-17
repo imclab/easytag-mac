@@ -144,6 +144,12 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
     GtkosxApplication *osx_app;
 #endif
 
+#ifdef GTKOSXAPPLICATION
+#   define MODIFIER1 "<Meta>"
+#else
+#   define MODIFIER1 "<Control>"
+#endif
+
     /*
      * Structure :
      *  - name
@@ -210,40 +216,39 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
         { AM_SORT_DESCENDING_FILE_SAMPLERATE, GTK_STOCK_SORT_DESCENDING, _("Descending by samplerate"),      NULL, _("Descending by samplerate"),      G_CALLBACK(Menu_Sort_Action) },
 
         { AM_OPEN_FILE_WITH, GTK_STOCK_OPEN, _("Open Files With…"),
-          "<Control><Shift>O", _("Run a command on the selected files"),
+          MODIFIER1 "<Shift>O", _("Run a command on the selected files"),
           G_CALLBACK (Browser_Open_Run_Program_List_Window) },
-        { AM_SELECT_ALL, GTK_STOCK_SELECT_ALL, NULL, "<Control>A",
+        { AM_SELECT_ALL, GTK_STOCK_SELECT_ALL, NULL, MODIFIER1 "A",
           _("Select all"), G_CALLBACK (et_on_action_select_all) },
         { AM_UNSELECT_ALL, "easytag-unselect-all", _("Unselect All"),
-          "<Shift><Control>A", _("Clear the current selection"),
+          MODIFIER1 "<Shift>A", _("Clear the current selection"),
           G_CALLBACK (et_on_action_unselect_all) },
         { AM_INVERT_SELECTION, "easytag-invert-selection",
-          _("Invert File Selection"), "<Control>I",
+          _("Invert File Selection"), MODIFIER1 "I",
           _("Invert file selection"),
           G_CALLBACK (Action_Invert_Files_Selection) },
         { AM_DELETE_FILE,        GTK_STOCK_DELETE,           _("Delete Files"),             NULL,                _("Delete files"),            G_CALLBACK(Action_Delete_Selected_Files) },
-        { AM_FIRST,              GTK_STOCK_GOTO_FIRST,       _("_First File"),                "<Control>Home",     _("First file"),                G_CALLBACK(Action_Select_First_File) },
+        { AM_FIRST,              GTK_STOCK_GOTO_FIRST,       _("_First File"),                MODIFIER1 "Home",     _("First file"),                G_CALLBACK(Action_Select_First_File) },
         { AM_PREV,               GTK_STOCK_GO_BACK,          _("_Previous File"),             "Page_Up",           _("Previous file"),             G_CALLBACK(Action_Select_Prev_File) },
         { AM_NEXT,               GTK_STOCK_GO_FORWARD,       _("_Next File"),                 "Page_Down",         _("Next file"),                 G_CALLBACK(Action_Select_Next_File) },
-        { AM_LAST,               GTK_STOCK_GOTO_LAST,        _("_Last File"),                 "<Control>End",      _("Last file"),                 G_CALLBACK(Action_Select_Last_File) },
+        { AM_LAST,               GTK_STOCK_GOTO_LAST,        _("_Last File"),                 MODIFIER1 "End",      _("Last file"),                 G_CALLBACK(Action_Select_Last_File) },
         { AM_SCAN_FILES, GTK_STOCK_APPLY, _("S_can Files"), NULL,
           _("Scan selected files"), G_CALLBACK (Action_Scan_Selected_Files) },
-        { AM_REMOVE, GTK_STOCK_CLEAR, _("_Remove Tags"), "<Control>E",
+        { AM_REMOVE, GTK_STOCK_CLEAR, _("_Remove Tags"), MODIFIER1 "E",
           _("Remove tags"), G_CALLBACK (Action_Remove_Selected_Tags) },
-        { AM_UNDO, GTK_STOCK_UNDO, _("_Undo Last Files Changes"), "<Control>Z",
+        { AM_UNDO, GTK_STOCK_UNDO, _("_Undo Last Files Changes"), MODIFIER1 "Z",
           _("Undo last files changes"),
           G_CALLBACK(Action_Undo_Selected_Files) },
-        { AM_REDO,               GTK_STOCK_REDO,             _("R_edo Last Files Changes"), "<Shift><Control>Z", _("Redo last files changes"), G_CALLBACK(Action_Redo_Selected_File) },
-        { AM_SAVE, GTK_STOCK_SAVE, _("_Save Files"), "<Control>S",
+        { AM_REDO,               GTK_STOCK_REDO,             _("R_edo Last Files Changes"), MODIFIER1 "<Shift>Z", _("Redo last files changes"), G_CALLBACK(Action_Redo_Selected_File) },
+        { AM_SAVE, GTK_STOCK_SAVE, _("_Save Files"), MODIFIER1 "S",
           _("Save changes to selected files"),
           G_CALLBACK(Action_Save_Selected_Files) },
         { AM_SAVE_FORCED, GTK_STOCK_SAVE, _("_Force Save Files"),
-          "<Shift><Control>S", _("Force saving files"),
+          MODIFIER1 "<Shift>S", _("Force saving files"),
           G_CALLBACK (Action_Force_Saving_Selected_Files) },
         { AM_UNDO_HISTORY,       GTK_STOCK_UNDO,             _("Undo Last Changes"),          NULL,                _("Undo last changes"),         G_CALLBACK(Action_Undo_From_History_List) },
         { AM_REDO_HISTORY,       GTK_STOCK_REDO,             _("Redo Last Changes"),          NULL,                _("Redo last changes"),         G_CALLBACK(Action_Redo_From_History_List) },
-        { AM_QUIT,               GTK_STOCK_QUIT,             _("_Quit"),                      "<Control>Q",        _("Quit"),                      G_CALLBACK(Quit_MainWindow) },
-
+        { AM_QUIT,               GTK_STOCK_QUIT,             _("_Quit"),                      MODIFIER1 "Q",        _("Quit"),                      G_CALLBACK(Quit_MainWindow) },
         { MENU_BROWSER,                NULL,                   _("_Browser"),                      NULL,                NULL,                               NULL },
         { AM_LOAD_HOME_DIR, GTK_STOCK_HOME, _("_Home Directory"), "<Alt>Home",
           _("Go to home directory"),
@@ -264,45 +269,50 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
           "<Alt>Up", _("Go to parent directory"),
           G_CALLBACK (et_browser_on_action_parent_directory) },
         { AM_LOAD_DEFAULT_DIR, GTK_STOCK_JUMP_TO, _("_Default Directory"),
-          "<Control>D", _("Go to default directory"),
+          MODIFIER1 "D", _("Go to default directory"),
           G_CALLBACK (Browser_Load_Default_Directory) },
         { AM_SET_PATH_AS_DEFAULT,      GTK_STOCK_DIRECTORY,    _("Set _Current Path as Default"),  NULL,                _("Set current path as default"),   G_CALLBACK(Set_Current_Path_As_Default) },
         { AM_RENAME_DIR,               GTK_STOCK_INDEX,        _("Rename Directory…"),          "F2",                _("Rename directory"),          G_CALLBACK(Browser_Open_Rename_Directory_Window) },
         { AM_RELOAD_DIRECTORY, GTK_STOCK_REFRESH, _("Reload Directory"),
-          "<Control>R", _("Reload directory"),
+          MODIFIER1 "R", _("Reload directory"),
           G_CALLBACK (Browser_Reload_Directory) },
         { AM_BROWSE_DIRECTORY_WITH, GTK_STOCK_EXECUTE,
           _("Browse Directory With…"), NULL,
           _("Run a command on the directory"),
           G_CALLBACK (Browser_Open_Run_Program_Tree_Window) },
-        { AM_COLLAPSE_TREE, NULL, _("_Collapse Tree"), "<Control><Shift>C",
+        { AM_COLLAPSE_TREE, NULL, _("_Collapse Tree"), MODIFIER1 "<Shift>C",
           _("Collapse directory tree"), G_CALLBACK (Browser_Tree_Collapse) },
         { AM_INITIALIZE_TREE, GTK_STOCK_REFRESH, _("_Reload Tree"),
-          "<Control><Shift>R", _("Reload directory tree"),
+          MODIFIER1 "<Shift>R", _("Reload directory tree"),
           G_CALLBACK (Browser_Tree_Rebuild) },
 
         { MENU_SCANNER, NULL, _("S_canner Mode"), NULL, NULL, NULL },
 
         { MENU_MISC,                NULL,                   _("_Miscellaneous"),                             NULL,         NULL,                                 NULL },
-        { AM_SEARCH_FILE, GTK_STOCK_FIND, _("_Find…"), "<Control>F",
+        { AM_SEARCH_FILE, GTK_STOCK_FIND, _("_Find…"), MODIFIER1 "F",
           _("Search filenames and tags"),
           G_CALLBACK (Open_Search_File_Window) },
-        { AM_CDDB_SEARCH, GTK_STOCK_CDROM, _("CDD_B Search…"), "<Control>B",
+        { AM_CDDB_SEARCH, GTK_STOCK_CDROM, _("CDD_B Search…"), MODIFIER1 "B",
           _("CDDB search"), G_CALLBACK (Open_Cddb_Window) },
         { AM_FILENAME_FROM_TXT, GTK_STOCK_OPEN,
-          _("Load Filenames From a Text File…"), "<Control>T",
+          _("Load Filenames From a Text File…"), MODIFIER1 "T",
           _("Load filenames from a text file"),
           G_CALLBACK (Open_Load_Filename_Window) },
         { AM_WRITE_PLAYLIST, GTK_STOCK_SAVE_AS, _("Generate Playlist…"),
-          "<Control>W", _("Generate a playlist"),
+          MODIFIER1 "W", _("Generate a playlist"),
           G_CALLBACK (Open_Write_Playlist_Window) },
         { AM_RUN_AUDIO_PLAYER, GTK_STOCK_MEDIA_PLAY, _("Run Audio Player"),
-          "<Control>M", _("Run audio player"),
+          MODIFIER1 "M", _("Run audio player"),
           G_CALLBACK (Run_Audio_Player_Using_Selection) },
 
         { MENU_EDIT, NULL, _("_Edit"), NULL, NULL, NULL },
         { AM_OPEN_OPTIONS_WINDOW, GTK_STOCK_PREFERENCES, _("_Preferences"),
-          NULL, _("Preferences"), G_CALLBACK (Open_OptionsWindow) },
+#ifdef GTKOSXAPPLICATION
+          MODIFIER1 "comma",
+#else
+          NULL,
+#endif
+          _("Preferences"), G_CALLBACK (Open_OptionsWindow) },
 
         { MENU_VIEW, NULL, _("_View"), NULL, NULL, NULL },
         { MENU_GO, NULL, _("_Go"), NULL, NULL, NULL },
@@ -349,7 +359,7 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
 
     GtkRadioActionEntry view_mode_entries[] =
     {
-        { AM_TREE_VIEW_MODE, "audio-x-generic", _("Tree Browser"), NULL,
+        { AM_TREE_VIEW_MODE, GTK_STOCK_OPEN, _("Tree Browser"), NULL,
           _("View by directory tree"), 0 },
         { AM_ARTIST_VIEW_MODE, "easytag-artist-album",
           _("Artist and Album"), NULL,
@@ -435,6 +445,21 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
     gtk_widget_hide(menubar);
     osx_app = g_object_new(GTKOSX_TYPE_APPLICATION, NULL);
     gtkosx_application_set_menu_bar(osx_app, GTK_MENU_SHELL(menubar));
+
+    GtkosxApplicationMenuGroup *group;
+    GtkMenuItem *about_item, *preferences_item;
+
+    about_item = gtk_ui_manager_get_widget(UIManager, "/MenuBar/HelpMenu/About");
+    gtk_widget_hide(about_item);
+
+    preferences_item = gtk_ui_manager_get_widget(UIManager, "/MenuBar/EditMenu/Preferences");
+    gtk_widget_hide(preferences_item);
+
+    gtk_widget_hide(gtk_ui_manager_get_widget(UIManager, "/MenuBar/FileMenu/Quit"));
+
+    gtkosx_application_insert_app_menu_item(osx_app, GTK_WIDGET(about_item), 0);
+    gtkosx_application_insert_app_menu_item(osx_app, gtk_separator_menu_item_new(), 1);
+    gtkosx_application_insert_app_menu_item(osx_app, GTK_WIDGET(preferences_item), 2);
 #endif
 
     toolbar = gtk_ui_manager_get_widget (UIManager, "/ToolBar");
@@ -452,7 +477,7 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
 static void
 Init_Menu_Bar (void)
 {
-    
+
     CheckMenuItemBrowseSubdirMainMenu = gtk_ui_manager_get_widget(UIManager, "/MenuBar/BrowserMenu/BrowseSubdir");
     if (CheckMenuItemBrowseSubdirMainMenu)
     {
@@ -579,7 +604,7 @@ Statusbar_Message (const gchar *message, gboolean with_timer)
     g_return_if_fail (StatusBar != NULL);
 
     msg_temp = Try_To_Validate_Utf8_String(message);
-    
+
     /* Push the given message */
     if (with_timer)
     {
