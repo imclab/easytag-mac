@@ -1,0 +1,3 @@
+*.dmg
+build
+!Makefile

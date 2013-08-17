@@ -13,13 +13,14 @@
          either define your own or just hardcode the path here.
     -->
     <prefix name="default">${env:JHBUILD_PREFIX}</prefix>
-    <prefix name="brew">/usr/local/lib</prefix>
+    <prefix name="local">/usr/local/lib</prefix>
+    <prefix name="brew">/usr/local/Cellar</prefix>
 
     <!-- The project directory is the default location of the created
          app. If you leave out the path, the current directory is
          used. Note the usage of an environment variable here again.
     -->
-    <destination overwrite="yes">${env:HOME}/Desktop</destination>
+    <destination overwrite="yes">${project}/build</destination>
 
     <image>
       <!-- Not implemented yet (DMG image). -->
@@ -34,7 +35,7 @@
          not needed. If the source path is left out, the default
          script will be used.
     -->
-    <launcher-script>${project}/launcher.sh</launcher-script >
+    <launcher-script>${project}/launcher.sh</launcher-script>
 
     <!-- Not implemented: Optional runtime, could be python or mono
          for example.
@@ -49,7 +50,7 @@
        this bundle file is located. The application name and bundle
        identifier are taken from the plist file.
   -->
-  <plist>${project}/Info-easytag.plist</plist>
+  <plist>${project}/Info.plist</plist>
 
   <main-binary>${prefix}/bin/easytag</main-binary>
 
