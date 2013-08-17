@@ -137,9 +137,9 @@
        icon names. To be safe, you should use "all". "none" is useful
        if you want just the index.theme file but no icons, mostly
        needed for the "hicolor" base theme.
-  >
+  > -->
   <icon-theme icons="auto">
-    Tango
-  </icon-theme -->
+    Gnome
+  </icon-theme>
 
 </app-bundle>
