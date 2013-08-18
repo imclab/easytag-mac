@@ -11,14 +11,10 @@
                 margin: 0 auto;
                 padding: 3em 0;
                 text-align: center;
-                background: #ffffff; /* Old browsers */
-                background: -moz-linear-gradient(top,  #ffffff 0%, #cccccc 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top,  #ffffff 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top,  #ffffff 0%,#cccccc 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top,  #ffffff 0%,#cccccc 100%); /* IE10+ */
-                background: linear-gradient(to bottom,  #ffffff 0%,#cccccc 100%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+                background: #ffffff;
+                background: -moz-linear-gradient(#ffffff, #cccccc);
+                background: -webkit-linear-gradient(#ffffff, #cccccc);
+                background: linear-gradient(#ffffff, #cccccc);
                 background-size: 100% 100%;
                 background-attachment: fixed;
             }
@@ -37,11 +33,68 @@
 
             a:link, a:visited {
                 color: #336699;
+                text-decoration: none;
             }
 
             .logo {
                 display: block;
                 margin: 0 auto;
+            }
+
+            .button {
+                position: relative;
+                display: inline-block;
+                padding: 7px 15px;
+                font-size: 13px;
+                font-weight: bold;
+                color: #333;
+                text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+                white-space: nowrap;
+                background-color: #eaeaea;
+                background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+                background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+                background-image: linear-gradient(#fafafa, #eaeaea);
+                background-repeat: repeat-x;
+                border-radius: 3px;
+                border: 1px solid #ddd;
+                border-bottom-color: #c5c5c5;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                vertical-align: middle;
+                cursor: pointer;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                -webkit-appearance: none;
+            }
+
+            .button.primary {
+                color: #fff;
+                text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+                background-color: #60b044;
+                background-image: -moz-linear-gradient(#8add6d, #60b044);
+                background-image: -webkit-linear-gradient(#8add6d, #60b044);
+                background-image: linear-gradient(#8add6d, #60b044);
+                background-repeat: repeat-x;
+                border-color: #5ca941;
+            }
+
+            .button.primary:hover {
+                color: #fff;
+                background-color: #569e3d;
+                background-image: -moz-linear-gradient(#79d858, #569e3d);
+                background-image: -webkit-linear-gradient(#79d858, #569e3d);
+                background-image: linear-gradient(#79d858, #569e3d);
+                background-repeat: repeat-x;
+                border-color: #4a993e;
+            }
+
+            .button.primary:active {
+                background-color: #569e3d;
+                background-image: none;
+                border-color: #418737;
             }
 
             figure figcaption {
@@ -64,7 +117,7 @@
         <h2>Disclaimer</h2>
         <p>By using this build, you agree not to hold me responsible if your laundry is eaten. <strong>This is not an official build.</strong></p>
         <h2>Releases</h2>
-        <p><strong>Latest:</strong> <a href="https://github.com/rfw/easytag-mac/releases/tag/v2.1.8-mac-alpha-1">v2.1.8-mac-alpha-1</a></p>
+        <p><a href="https://github.com/rfw/easytag-mac/releases/tag/v2.1.8-mac-alpha-1" class="button primary">Download Latest (v2.1.8-mac-alpha-1)</a></p>
         <p>If you find any bugs in this release, please <a href="https://github.com/rfw/easytag-mac/issues">file a bug report on the issue tracker</a>.</p>
         <h2>Screenshots</h2>
         <figure>
